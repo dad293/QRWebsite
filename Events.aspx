@@ -20,18 +20,14 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="container">
-
             <%-- Webpage Heading --%>
-            <div class="row">
-                <div class="col-xs-12">
-                    <h1>Event Information</h1>
+                <div class="QR-header">
+                              <img src="../images/QR_Header2.png" alt="QR Logo" /> 
                 </div>
-            </div>
 
             <%-- Menu / Message / New link --%>
             <div class="navbar-collapse collapse">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <ul class="nav navbar-nav" style="font-weight: bold;">
                         <li>
                             <asp:HyperLink ID="hlHome" NavigateUrl="~/Default.aspx" runat="server">Home</asp:HyperLink><br />
@@ -44,14 +40,20 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-2">
                     <asp:Label ID="lblMessage" runat="server" Text="" />
                 </div>
-                <div class="col-sm-4" style="text-align: right;">
+                <div class="col-sm-4" style="padding-top: 15px;text-align: right;">
 <%--                    <asp:Label ID="Label5" runat="server" Text="[" Font-Size="12px" Visible="true"></asp:Label>
                     <asp:LinkButton ID="lbNewComp" runat="server" Font-Size="12px" OnClick="lbNewComp_Click">New</asp:LinkButton>
                     <asp:Label ID="Label6" runat="server" Text="]" Font-Size="12px" Visible="true"></asp:Label>--%>
                     <asp:Button ID="lbNewComp1" runat="server" class="btn btn-danger button-xs" Font-Size="12px" Text="New Event" Visible="true" CausesValidation="false" OnClick="lbNewComp1_Click"/>                    
+                </div>
+            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>Event Information</h1>
                 </div>
             </div>
 

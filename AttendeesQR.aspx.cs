@@ -11,7 +11,7 @@ using ZXing;
 
 namespace QRWebsite
 {
-    public partial class Employees : System.Web.UI.Page
+    public partial class Employees1 : System.Web.UI.Page
     {
         int Emp_ID;
         SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["QRDBConnection"].ConnectionString);
@@ -27,10 +27,14 @@ namespace QRWebsite
             try
             {
                 myCon.Open();
-                using (SqlCommand myCom = new SqlCommand("dbo.usp_GetEmployees", myCon))
+                using (SqlCommand myCom = new SqlCommand("dbo.usp_GetEmployees_ATT_QR", myCon))
                 {
                     myCom.Connection = myCon;
                     myCom.CommandType = CommandType.StoredProcedure;
+
+                // *** GET VALUE FROM QR CODE
+
+                    myCom.Parameters.Add("@ID", SqlDbType.VarChar).Value = paramValuefromPage;
 
                     SqlDataReader myDr = myCom.ExecuteReader();
 
@@ -215,7 +219,7 @@ namespace QRWebsite
         private void doCreateQRImage(string myEmpDetails)
         {
             string strEmpID = (myEmpDetails.Split('_')[0]).ToString();
-            string strCompID = (myEmpDetails.Split('_')[4]).ToString();
+            int intCmpID = int.Parse(ddlCompany.SelectedValue);
             var QCwriter = new BarcodeWriter();
             QCwriter.Format = BarcodeFormat.QR_CODE;
             QCwriter.Options = new ZXing.Common.EncodingOptions
@@ -226,8 +230,7 @@ namespace QRWebsite
             //UPDATE TO OPEN WEBSITE TO FIND SPECIFIC ID
             // pass website and strEmpID to open to attendee record (modal)
             //var result = QCwriter.Write(myEmpDetails);
-            
-            myEmpDetails = "https://webappist440appservice.azurewebsites.net/AttendeesQR.aspx?var1=" + strEmpID;
+            myEmpDetails = "https://webappist440appservice.azurewebsites.net/Attendees.aspx?var1=" + strEmpID+ "var2=" + intCmpID;
             var result = QCwriter.Write(myEmpDetails);
             string path = Server.MapPath("~/Images/" + strEmpID + ".jpg");
             var barcodeBitmap = new Bitmap(result);

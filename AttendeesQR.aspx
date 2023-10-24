@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Attendees.aspx.cs" Inherits="QRWebsite.Employees" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AttendeesQR.aspx.cs" Inherits="QRWebsite.Employees1" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Attendees</title>
+    <title>Attendees by Event</title>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -34,14 +34,14 @@
                 <div class="col-sm-6">
                     <ul class="nav navbar-nav" style="font-weight: bold;">
                         <li>
-                            <asp:HyperLink ID="hlHome" NavigateUrl="~/Default.aspx" runat="server">Home</asp:HyperLink><br />
+                            <asp:HyperLink ID="hlHome" NavigateUrl="~/AttendeesQR.aspx" runat="server">Home</asp:HyperLink><br />
                         </li>
-                        <li>
+<%--                        <li>
                             <asp:HyperLink ID="hlEmployees" NavigateUrl="~/Attendees.aspx" runat="server">Attendees</asp:HyperLink><br />
                         </li>
                         <li>
                             <asp:HyperLink ID="hlCompanies" NavigateUrl="~/Events.aspx" runat="server">Event Information</asp:HyperLink><br />
-                        </li>
+                        </li>--%>
                     </ul>
                 </div>
                 <div class="col-sm-2">
@@ -51,13 +51,13 @@
                     <%--<asp:Label ID="Label5" runat="server" Text="[" Font-Size="12px" Visible="true"></asp:Label>--%>
                     <%--<asp:LinkButton ID="lbNewEmp" runat="server" Font-Size="12px" OnClick="lbNewEmp_Click">New</asp:LinkButton>--%>
                     <%--<asp:Label ID="Label6" runat="server" Text="]" Font-Size="12px" Visible="true"></asp:Label>--%>
-                    <asp:Button ID="lbNewEmp1" runat="server" class="btn btn-danger button-xs" Font-Size="12px" Text="New Attendee" Visible="true" CausesValidation="false" OnClick="lbNewEmp_Click"/>                    
+                    <%--<asp:Button ID="lbNewEmp1" runat="server" class="btn btn-danger button-xs" Font-Size="12px" Text="New Attendee" Visible="true" CausesValidation="false" OnClick="lbNewEmp_Click"/>                    --%>
                 </div>
             </div>
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h1>Attendees</h1>
+                    <h1>Attendees by Event</h1>
                 </div>
             </div>
 
@@ -106,23 +106,23 @@
                         </asp:TemplateField>
 
                             <%-- Delete Employee --%>
-                            <asp:TemplateField>
+<%--                            <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lbDelEmployee" Text="Del" runat="server"
                                         OnClientClick="return confirm('Are you sure you want to delete this employee?');" CommandName="Delete" />
                                 </ItemTemplate>
                                 <HeaderStyle HorizontalAlign="Left" />
                                 <ItemStyle HorizontalAlign="Center" Width="50px" />
-                            </asp:TemplateField>
+                            </asp:TemplateField>--%>
 
                             <%-- Update Employee --%>
-                            <asp:TemplateField HeaderText="">
+<%--                            <asp:TemplateField HeaderText="">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lbUpdEmployee" runat="server" CommandArgument='<%# Eval("ID") %>'
                                         CommandName="UpdEmployee" Text="Upd" CausesValidation="false"></asp:LinkButton>
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" Width="80px" />
-                            </asp:TemplateField>
+                            </asp:TemplateField>--%>
 
                         </Columns>
                     </asp:GridView>
@@ -272,7 +272,7 @@
                                             </div>
                                             <div class="col-sm-7">
                                                 <asp:Label ID="lblEmployeeName" runat="server"
-                                                    ToolTip="Employee Name"
+                                                    ToolTip="Attendee Name"
                                                     AutoCompleteType="Disabled" Font-Size="14px" />
                                                 <%--<asp:Label runat="server" ID="Label2" Visible="false" Font-Size="12px" />--%>
                                                 <asp:Label runat="server" ID="Label3" Visible="false" Font-Size="1px" />
@@ -305,7 +305,7 @@
                                         <div class="row" style="margin-top: 20px;">
                                             <div class="col-sm-1"></div>
                                             <div class="col-sm-3">
-                                                <asp:Label ID="Label9" runat="server" Text="Company:" Font-Size="14px" Font-Bold="true" />
+                                                <asp:Label ID="Label9" runat="server" Text="Event:" Font-Size="14px" Font-Bold="true" />
                                             </div>
                                             <div class="col-sm-7">
                                                 <asp:Label ID="lblCompany" runat="server" Visible="true" Font-Size="14px" />

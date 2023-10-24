@@ -4,24 +4,24 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>QR Party Dashboard</title>
+    <title>Events with QR Dashboard</title>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <form id="form1" runat="server">
             <%-- Webpage Heading --%>
-            <div class="row">
-                <div class="col-xs-12">
-                    <h1 class="QR-h1">Events with QR Dashboard</h1>
+
+                <div class="QR-header">
+                              <img src="../images/QR_Header2.png" alt="QR Logo" /> 
                 </div>
-            </div>
-<%--        <div class="navbar-collapse collapse">--%>
-                    <ul class="nav navbar-nav" style="font-weight: bold;">
+
+        <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav " style="font-weight: bold;">
                         <li>
                             <asp:HyperLink ID="hlHome" NavigateUrl="~/Default.aspx" runat="server">Home</asp:HyperLink><br />
                         </li>
@@ -32,7 +32,7 @@
                              <asp:HyperLink ID="hlCompanies" NavigateUrl="~/Events.aspx" runat="server">Event Information</asp:HyperLink><br />                            
                         </li>
                     </ul>
-<%--        </div>--%>
+        </div>
 <%--                <div class="maintenance-icon1">
                     <a runat="server" href="~/#">
                         <i ID="AdminImage" class="bi bi-file-earmark-lock2-fill"></i>

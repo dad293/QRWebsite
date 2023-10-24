@@ -11,7 +11,7 @@ namespace QRWebsite
 {
 
 
-    public partial class Employees
+    public partial class Employees1
     {
 
         /// <summary>
@@ -42,24 +42,6 @@ namespace QRWebsite
         protected global::System.Web.UI.WebControls.HyperLink hlHome;
 
         /// <summary>
-        /// hlEmployees control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlEmployees;
-
-        /// <summary>
-        /// hlCompanies control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlCompanies;
-
-        /// <summary>
         /// lblMessage control.
         /// </summary>
         /// <remarks>
@@ -67,15 +49,6 @@ namespace QRWebsite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
-
-        /// <summary>
-        /// lbNewEmp1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button lbNewEmp1;
 
         /// <summary>
         /// gvEmployees control.
