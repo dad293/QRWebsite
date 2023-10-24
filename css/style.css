@@ -1,9 +1,36 @@
-﻿
-.QR-h1 {
-    font-family: Verdana,sans-serif;
-    margin-left: 10px;
+﻿:root {
+    /* Define your CSS variables here */
+    --inputBG-color: rgba(57, 63, 84, 0.8);
+    --input-text-inactive: #7881a1;
+    --input-text-active: #333;
+    --input-border-active: #1e407c;
+    --psu-dark-blue: #002d62; 
+    --white: #fff;
 }
 
-#AdminImage {
-    font-size: 30px
+
+.QR-header {
+/*    background-color: #ffffff;*/
+    text-align: center;
+    padding: 20px;
+    background-image: url("../images/header_background.png");
+    
+    /*color: var(--psu-dark-blue);*/
 }
+
+.navbar-collapse {
+    background-color: var(--psu-dark-blue);
+    font-family: Verdana !important;
+}
+li {
+    padding: 15px 15px 0px 15px;
+}
+
+.nav a {
+    color: var(--white);
+}
+
+    .nav a:hover {
+        color: var(--psu-dark-blue);
+/*        background-color: var(--psu-dark-blue);*/
+    }
