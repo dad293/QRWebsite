@@ -255,7 +255,7 @@
                 <div class="modal-content" style="font-size: 11px;">
 
                     <div class="modal-header" style="text-align: center;">
-                        <asp:Label ID="Label1" runat="server" Text="Employee QR Image" Font-Size="24px" Font-Bold="true" />
+                        <asp:Label ID="Label1" runat="server" Text="Attendee QR Image" Font-Size="24px" Font-Bold="true" />
                     </div>
 
                     <div class="modal-body">
@@ -268,11 +268,11 @@
                                         <div class="row" style="margin-top: 20px;">
                                             <div class="col-sm-1"></div>
                                             <div class="col-sm-3">
-                                                <asp:Label ID="Label2" runat="server" Text="Employee:" Font-Size="14px" Font-Bold="true" />
+                                                <asp:Label ID="Label2" runat="server" Text="Attendee:" Font-Size="14px" Font-Bold="true" />
                                             </div>
                                             <div class="col-sm-7">
                                                 <asp:Label ID="lblEmployeeName" runat="server"
-                                                    ToolTip="Employee Name"
+                                                    ToolTip="Attendee Name"
                                                     AutoCompleteType="Disabled" Font-Size="14px" />
                                                 <%--<asp:Label runat="server" ID="Label2" Visible="false" Font-Size="12px" />--%>
                                                 <asp:Label runat="server" ID="Label3" Visible="false" Font-Size="1px" />
@@ -305,7 +305,7 @@
                                         <div class="row" style="margin-top: 20px;">
                                             <div class="col-sm-1"></div>
                                             <div class="col-sm-3">
-                                                <asp:Label ID="Label9" runat="server" Text="Company:" Font-Size="14px" Font-Bold="true" />
+                                                <asp:Label ID="Label9" runat="server" Text="Event:" Font-Size="14px" Font-Bold="true" />
                                             </div>
                                             <div class="col-sm-7">
                                                 <asp:Label ID="lblCompany" runat="server" Visible="true" Font-Size="14px" />

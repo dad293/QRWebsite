@@ -19,7 +19,10 @@ namespace QRWebsite
         {
             if (!IsPostBack)
             {
+                
                 DoGridView();
+                int intAttendID = Convert.ToInt32(Request.QueryString["var1"]);
+                DisplayAttendee(intAttendID);
             }
         }
         private void DoGridView()
@@ -27,14 +30,17 @@ namespace QRWebsite
             try
             {
                 myCon.Open();
-                using (SqlCommand myCom = new SqlCommand("dbo.usp_GetEmployees_ATT_QR", myCon))
+                using (SqlCommand myCom = new SqlCommand("dbo.usp_GetEmployees_ATT_QR", myCon)) //x
                 {
                     myCom.Connection = myCon;
                     myCom.CommandType = CommandType.StoredProcedure;
 
-                // *** GET VALUE FROM QR CODE
+                    // *** GET VALUE FROM QR CODE
+                    string strCmpID = Request.QueryString["var2"];
+                    // make sure to account for SQL Injection
 
-                    myCom.Parameters.Add("@ID", SqlDbType.VarChar).Value = paramValuefromPage;
+
+                    myCom.Parameters.Add("@ID", SqlDbType.VarChar).Value = strCmpID;
 
                     SqlDataReader myDr = myCom.ExecuteReader();
 
@@ -227,10 +233,10 @@ namespace QRWebsite
                 Width = 400,
                 Height = 400
             };
-            //UPDATE TO OPEN WEBSITE TO FIND SPECIFIC ID
+            //THIS IS THE DASHBOARD SO WILL NEVER CREATE HERE
             // pass website and strEmpID to open to attendee record (modal)
             //var result = QCwriter.Write(myEmpDetails);
-            myEmpDetails = "https://webappist440appservice.azurewebsites.net/Attendees.aspx?var1=" + strEmpID+ "var2=" + intCmpID;
+           // myEmpDetails = "https://webappist440appservice.azurewebsites.net/Attendees.aspx?var1=" + strEmpID+ "var2=" + intCmpID;
             var result = QCwriter.Write(myEmpDetails);
             string path = Server.MapPath("~/Images/" + strEmpID + ".jpg");
             var barcodeBitmap = new Bitmap(result);
@@ -364,6 +370,28 @@ namespace QRWebsite
             }
             catch (Exception ex) { lblMessage.Text = "Error in Employees - GetCompaniesForDLL: " + ex.Message; }
             finally { myCon.Close(); }
+        }
+
+        private void DisplayAttendee(int strAttID) 
+        {
+            Emp_ID = strAttID;
+
+            GetEmployee(Emp_ID);
+
+            if (lblQRCreated.Text == "Yes")
+            {
+                chkLoadImage(Emp_ID.ToString(), true);
+            }
+            else
+            {
+                string myEmpDetails = Emp_ID.ToString() + "-"
+                    + lblEmployeeName.Text + "-"
+                    + lblContactNo.Text + "-"
+                    + lblEmail.Text + "-"
+                    + lblCompany.Text;
+            }
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openEmpQR();", true);
         }
     }
 }

@@ -215,7 +215,7 @@ namespace QRWebsite
         private void doCreateQRImage(string myEmpDetails)
         {
             string strEmpID = (myEmpDetails.Split('_')[0]).ToString();
-            string strCompID = (myEmpDetails.Split('_')[4]).ToString();
+            int intCmpID = int.Parse(ddlCompany.SelectedValue);
             var QCwriter = new BarcodeWriter();
             QCwriter.Format = BarcodeFormat.QR_CODE;
             QCwriter.Options = new ZXing.Common.EncodingOptions
@@ -226,8 +226,8 @@ namespace QRWebsite
             //UPDATE TO OPEN WEBSITE TO FIND SPECIFIC ID
             // pass website and strEmpID to open to attendee record (modal)
             //var result = QCwriter.Write(myEmpDetails);
-            
-            myEmpDetails = "https://webappist440appservice.azurewebsites.net/AttendeesQR.aspx?var1=" + strEmpID;
+
+            myEmpDetails = "https://webappist440appservice.azurewebsites.net/AttendeesQR.aspx?var1=" + strEmpID + "&var2=" + intCmpID;
             var result = QCwriter.Write(myEmpDetails);
             string path = Server.MapPath("~/Images/" + strEmpID + ".jpg");
             var barcodeBitmap = new Bitmap(result);
