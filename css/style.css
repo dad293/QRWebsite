@@ -34,3 +34,33 @@ li {
         color: var(--psu-dark-blue);
 /*        background-color: var(--psu-dark-blue);*/
     }
+
+.LoginOptions1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 75px;
+}
+#lbNewAtt1.btn.btn-danger.button-xs {
+    font-size: 18px;
+}
+
+.LoginOptions2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 75px;
+}
+
+#lbNewAdm1.btn.btn-info.button-xs {
+    font-size: 18px;
+/*    background-color: var(--psu-dark-blue);
+    color: var(--white);*/
+}
+#txtPassword {
+    font-size: 14px;
+    border: 1px solid silver;
+    border-radius: 3px;
+    height: 32px;
+    width: 200px;
+}
