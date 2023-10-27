@@ -14,13 +14,31 @@ namespace QRWebsite
     public partial class Employees1 : System.Web.UI.Page
     {
         int Emp_ID;
+        int RecordCheck;
         SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["QRDBConnection"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                
+
+                if (RecordCheck == 0)
+                {
+
+                    //OPEN NEW LOGIN MODAL
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openAttendeeLogin();", true);
+
+                }
+
+            }
+            if (RecordCheck == 0)
+            {
+
+            }
+            else
+            {
                 DoGridView();
+
                 int intAttendID = Convert.ToInt32(Request.QueryString["var1"]);
                 DisplayAttendee(intAttendID);
             }
@@ -53,50 +71,50 @@ namespace QRWebsite
             catch (Exception ex) { lblMessage.Text = "Error in Employees doGridView: " + ex.Message; }
             finally { myCon.Close(); }
         }
-        protected void lbNewEmp_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                txtEmployeeName.Text = "";
-                txtContactNo.Text = "";
-                txtEmail.Text = "";
+        //protected void lbNewEmp_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        txtEmployeeName.Text = "";
+        //        txtContactNo.Text = "";
+        //        txtEmail.Text = "";
 
-                lblEmployeeNew.Visible = true;
-                lblEmployeeUpd.Visible = false;
-                btnAddEmployee.Visible = true;
-                btnUpdEmployee.Visible = false;
+        //        lblEmployeeNew.Visible = true;
+        //        lblEmployeeUpd.Visible = false;
+        //        btnAddEmployee.Visible = true;
+        //        btnUpdEmployee.Visible = false;
 
-                GetCompaniesForDLL();
+        //        GetCompaniesForDLL();
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openEmpDetail();", true);
-            }
-            catch (Exception) { throw; }
-        }
-        protected void btnAddEmployee_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                myCon.Open();
-                using (SqlCommand myCom = new SqlCommand("dbo.usp_InsEmployee", myCon))
-                {
-                    myCom.CommandType = CommandType.StoredProcedure;
-                    myCom.Parameters.Add("@EmployeeName", SqlDbType.VarChar).Value = txtEmployeeName.Text;
-                    myCom.Parameters.Add("@ContactNo", SqlDbType.VarChar).Value = txtContactNo.Text;
-                    myCom.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text;
-                    myCom.Parameters.Add("@CompID", SqlDbType.VarChar).Value = int.Parse(ddlCompany.SelectedValue);
+        //        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openEmpDetail();", true);
+        //    }
+        //    catch (Exception) { throw; }
+        //}
+        //protected void btnAddEmployee_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        myCon.Open();
+        //        using (SqlCommand myCom = new SqlCommand("dbo.usp_InsEmployee", myCon))
+        //        {
+        //            myCom.CommandType = CommandType.StoredProcedure;
+        //            myCom.Parameters.Add("@EmployeeName", SqlDbType.VarChar).Value = txtEmployeeName.Text;
+        //            myCom.Parameters.Add("@ContactNo", SqlDbType.VarChar).Value = txtContactNo.Text;
+        //            myCom.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text;
+        //            myCom.Parameters.Add("@CompID", SqlDbType.VarChar).Value = int.Parse(ddlCompany.SelectedValue);
 
-                    myCom.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex) { lblMessage.Text = "Error in btnAddCompany_Click: " + ex.Message; }
-            finally { myCon.Close(); }
-            DoGridView();
-        }
-        protected void btnUpdEmployee_Click(object sender, EventArgs e)
-        {
-            UpdEmployee(lblQRCreated.Text);
-            DoGridView();
-        }
+        //            myCom.ExecuteNonQuery();
+        //        }
+        //    }
+        //    catch (Exception ex) { lblMessage.Text = "Error in btnAddCompany_Click: " + ex.Message; }
+        //    finally { myCon.Close(); }
+        //    DoGridView();
+        //}
+        //protected void btnUpdEmployee_Click(object sender, EventArgs e)
+        //{
+        //    UpdEmployee(lblQRCreated.Text);
+        //    DoGridView();
+        //}
         protected void gvEmployees_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -124,39 +142,39 @@ namespace QRWebsite
         {
             if (e.CommandName == "UpdEmployee")
             {
-                Emp_ID = Convert.ToInt32(e.CommandArgument);
+            //    Emp_ID = Convert.ToInt32(e.CommandArgument);
 
-                lblEmpID.Text = Emp_ID.ToString();
+            //    lblEmpID.Text = Emp_ID.ToString();
 
-                txtEmployeeName.Text = "";
-                txtContactNo.Text = "";
-                txtEmail.Text = "";
-                imgQREmp.ImageUrl = "";
-                imgShowQR.ImageUrl = "";
+            //    txtEmployeeName.Text = "";
+            //    txtContactNo.Text = "";
+            //    txtEmail.Text = "";
+            //    imgQREmp.ImageUrl = "";
+            //    imgShowQR.ImageUrl = "";
 
-                lblEmployeeNew.Visible = false;
-                lblEmployeeUpd.Visible = true;
-                btnAddEmployee.Visible = false;
-                btnUpdEmployee.Visible = true;
+            //    lblEmployeeNew.Visible = false;
+            //    lblEmployeeUpd.Visible = true;
+            //    btnAddEmployee.Visible = false;
+            //    btnUpdEmployee.Visible = true;
 
-                GetCompaniesForDLL();
-                GetEmployee(int.Parse(lblEmpID.Text));
-                if (lblQRCreated.Text == "Yes")
-                {
-                    imgQREmp.Visible = true;
-                    lblQRImageMsg.Visible = false;
-                    lbCreateQRImg.Visible = false;
+            //    GetCompaniesForDLL();
+            //    GetEmployee(int.Parse(lblEmpID.Text));
+            //    if (lblQRCreated.Text == "Yes")
+            //    {
+            //        imgQREmp.Visible = true;
+            //        lblQRImageMsg.Visible = false;
+            //        lbCreateQRImg.Visible = false;
 
-                    chkLoadImage(lblEmpID.Text, false);
-                }
-                else
-                {
-                    imgQREmp.Visible = false;
-                    lblQRImageMsg.Visible = true;
-                    lbCreateQRImg.Visible = true;
-                }
+            //        chkLoadImage(lblEmpID.Text, false);
+            //    }
+            //    else
+            //    {
+            //        imgQREmp.Visible = false;
+            //        lblQRImageMsg.Visible = true;
+            //        lbCreateQRImg.Visible = true;
+            //    }
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openEmpDetail();", true);
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openEmpDetail();", true);
             }
             else if (e.CommandName == "QREmp")
             {
@@ -180,77 +198,77 @@ namespace QRWebsite
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openEmpQR();", true);
             }
         }
-        protected void gvEmployees_RowDeleting(Object sender, GridViewDeleteEventArgs e)
-        {
-            Emp_ID = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Value.ToString());
+        //protected void gvEmployees_RowDeleting(Object sender, GridViewDeleteEventArgs e)
+        //{
+        //    Emp_ID = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Value.ToString());
 
-            try
-            {
-                myCon.Open();
+        //    try
+        //    {
+        //        myCon.Open();
 
-                using (SqlCommand cmd = new SqlCommand("dbo.usp_DelEmployee", myCon))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@ID", SqlDbType.Int).Value = Emp_ID;
-                    cmd.ExecuteScalar();
-                }
-            }
-            catch (Exception ex) { lblMessage.Text = "Error in gvEmployees_RowDeleting: " + ex.Message; }
-            finally { myCon.Close(); }
-            DoGridView();
-        }
+        //        using (SqlCommand cmd = new SqlCommand("dbo.usp_DelEmployee", myCon))
+        //        {
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = Emp_ID;
+        //            cmd.ExecuteScalar();
+        //        }
+        //    }
+        //    catch (Exception ex) { lblMessage.Text = "Error in gvEmployees_RowDeleting: " + ex.Message; }
+        //    finally { myCon.Close(); }
+        //    DoGridView();
+        //}
 
-        protected void lbCreateQRImg_Click(object sender, EventArgs e)
-        {
-// change here maybe but more so below                  
-            string myEmpDetails = lblEmpID.Text + "_"
-                + txtEmployeeName.Text + "_"
-                + txtContactNo.Text + "_"
-                + txtEmail.Text + "_"
-                + ddlCompany.SelectedItem.Text;
+        //        protected void lbCreateQRImg_Click(object sender, EventArgs e)
+        //        {
+        //// change here maybe but more so below                  
+        //            string myEmpDetails = lblEmpID.Text + "_"
+        //                + txtEmployeeName.Text + "_"
+        //                + txtContactNo.Text + "_"
+        //                + txtEmail.Text + "_"
+        //                + ddlCompany.SelectedItem.Text;
 
-            doCreateQRImage(myEmpDetails);
-            UpdEmployee("Yes");
-            GetEmployee(int.Parse(lblEmpID.Text));
-            chkLoadImage(lblEmpID.Text, false);
-            DoGridView();
+        //            doCreateQRImage(myEmpDetails);
+        //            UpdEmployee("Yes");
+        //            GetEmployee(int.Parse(lblEmpID.Text));
+        //            chkLoadImage(lblEmpID.Text, false);
+        //            DoGridView();
 
-            imgQREmp.Visible = true;
-            lblQRImageMsg.Visible = false;
-            lbCreateQRImg.Visible = false;
+        //            imgQREmp.Visible = true;
+        //            lblQRImageMsg.Visible = false;
+        //            lbCreateQRImg.Visible = false;
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openEmpDetail();", true);
-        }
+        //            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openEmpDetail();", true);
+        //        }
 
-        private void doCreateQRImage(string myEmpDetails)
-        {
-            string strEmpID = (myEmpDetails.Split('_')[0]).ToString();
-            int intCmpID = int.Parse(ddlCompany.SelectedValue);
-            var QCwriter = new BarcodeWriter();
-            QCwriter.Format = BarcodeFormat.QR_CODE;
-            QCwriter.Options = new ZXing.Common.EncodingOptions
-            {
-                Width = 400,
-                Height = 400
-            };
-            //THIS IS THE DASHBOARD SO WILL NEVER CREATE HERE
-            // pass website and strEmpID to open to attendee record (modal)
-            //var result = QCwriter.Write(myEmpDetails);
-           // myEmpDetails = "https://webappist440appservice.azurewebsites.net/Attendees.aspx?var1=" + strEmpID+ "var2=" + intCmpID;
-            var result = QCwriter.Write(myEmpDetails);
-            string path = Server.MapPath("~/Images/" + strEmpID + ".jpg");
-            var barcodeBitmap = new Bitmap(result);
+        //        private void doCreateQRImage(string myEmpDetails)
+        //        {
+        //            string strEmpID = (myEmpDetails.Split('_')[0]).ToString();
+        //            int intCmpID = int.Parse(ddlCompany.SelectedValue);
+        //            var QCwriter = new BarcodeWriter();
+        //            QCwriter.Format = BarcodeFormat.QR_CODE;
+        //            QCwriter.Options = new ZXing.Common.EncodingOptions
+        //            {
+        //                Width = 400,
+        //                Height = 400
+        //            };
+        //            //THIS IS THE DASHBOARD SO WILL NEVER CREATE HERE
+        //            // pass website and strEmpID to open to attendee record (modal)
+        //            //var result = QCwriter.Write(myEmpDetails);
+        //           // myEmpDetails = "https://webappist440appservice.azurewebsites.net/Attendees.aspx?var1=" + strEmpID+ "var2=" + intCmpID;
+        //            var result = QCwriter.Write(myEmpDetails);
+        //            string path = Server.MapPath("~/Images/" + strEmpID + ".jpg");
+        //            var barcodeBitmap = new Bitmap(result);
 
-            using (MemoryStream memory = new MemoryStream())
-            {
-                using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
-                {
-                    barcodeBitmap.Save(memory, ImageFormat.Jpeg);
-                    byte[] bytes = memory.ToArray();
-                    fs.Write(bytes, 0, bytes.Length);
-                }
-            }
-        }
+        //            using (MemoryStream memory = new MemoryStream())
+        //            {
+        //                using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
+        //                {
+        //                    barcodeBitmap.Save(memory, ImageFormat.Jpeg);
+        //                    byte[] bytes = memory.ToArray();
+        //                    fs.Write(bytes, 0, bytes.Length);
+        //                }
+        //            }
+        //        }
         private void chkLoadImage(string myEmpID, bool showImg)
         {
             try
@@ -264,8 +282,8 @@ namespace QRWebsite
                     }
                     else
                     {
-                        imgQREmp.ImageUrl = "~/Images/" + myEmpID + ".JPG";
-                        imgQREmp.AlternateText = "QR Image of Employee";
+                        //imgQREmp.ImageUrl = "~/Images/" + myEmpID + ".JPG";
+                        //imgQREmp.AlternateText = "QR Image of Employee";
                     }
                 }
             }
@@ -307,12 +325,12 @@ namespace QRWebsite
                     {
                         while (myDr.Read())
                         {
-                            txtEmployeeName.Text = myDr.GetValue(1).ToString();
-                            txtContactNo.Text = myDr.GetValue(2).ToString();
-                            txtEmail.Text = myDr.GetValue(3).ToString();
-                            ddlCompany.SelectedValue = myDr.GetValue(4).ToString();
-                            lblQRCreated.Text = myDr.GetValue(5).ToString();
-                            lblEmpID.Text = lblEmpID.Text;
+                            //txtEmployeeName.Text = myDr.GetValue(1).ToString();
+                            //txtContactNo.Text = myDr.GetValue(2).ToString();
+                            //txtEmail.Text = myDr.GetValue(3).ToString();
+                            //ddlCompany.SelectedValue = myDr.GetValue(4).ToString();
+                            //lblQRCreated.Text = myDr.GetValue(5).ToString();
+                            //lblEmpID.Text = lblEmpID.Text;
 
                             lblEmployeeName.Text = myDr.GetValue(1).ToString();
                             lblContactNo.Text = myDr.GetValue(2).ToString();
@@ -326,51 +344,51 @@ namespace QRWebsite
             catch (Exception ex) { lblMessage.Text = "Error in Companies GetEmployee: " + ex.Message; }
             finally { myCon.Close(); }
         }
-        private void UpdEmployee(string QRCreated)
-        {
-            try
-            {
-                myCon.Open();
-                using (SqlCommand cmd = new SqlCommand("dbo.usp_UpdEmployee", myCon))
-                {
-                    cmd.Connection = myCon;
-                    cmd.CommandType = CommandType.StoredProcedure;
+        //private void UpdEmployee(string QRCreated)
+        //{
+        //    try
+        //    {
+        //        myCon.Open();
+        //        using (SqlCommand cmd = new SqlCommand("dbo.usp_UpdEmployee", myCon))
+        //        {
+        //            cmd.Connection = myCon;
+        //            cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add("@ID", SqlDbType.Int).Value = int.Parse(lblEmpID.Text);
-                    cmd.Parameters.Add("@EmployeeName", SqlDbType.VarChar).Value = txtEmployeeName.Text;
-                    cmd.Parameters.Add("@ContactNo", SqlDbType.VarChar).Value = txtContactNo.Text;
-                    cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text;
-                    cmd.Parameters.Add("@CompID", SqlDbType.VarChar).Value = ddlCompany.SelectedValue;
+        //            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = int.Parse(lblEmpID.Text);
+        //            cmd.Parameters.Add("@EmployeeName", SqlDbType.VarChar).Value = txtEmployeeName.Text;
+        //            cmd.Parameters.Add("@ContactNo", SqlDbType.VarChar).Value = txtContactNo.Text;
+        //            cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text;
+        //            cmd.Parameters.Add("@CompID", SqlDbType.VarChar).Value = ddlCompany.SelectedValue;
 
-                    cmd.Parameters.Add("@QRCreated", SqlDbType.VarChar).Value = QRCreated;
+        //            cmd.Parameters.Add("@QRCreated", SqlDbType.VarChar).Value = QRCreated;
 
-                    int rows = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex) { lblMessage.Text = "Error in Employees - UpdEmployee: " + ex.Message; }
-            finally { myCon.Close(); }
-        }
-        private void GetCompaniesForDLL()
-        {
-            try
-            {
-                myCon.Open();
-                using (SqlCommand cmd = new SqlCommand("dbo.usp_GetCompanies", myCon))
-                {
-                    SqlDataReader myDr = cmd.ExecuteReader();
+        //            int rows = cmd.ExecuteNonQuery();
+        //        }
+        //    }
+        //    catch (Exception ex) { lblMessage.Text = "Error in Employees - UpdEmployee: " + ex.Message; }
+        //    finally { myCon.Close(); }
+        //}
+        //private void GetCompaniesForDLL()
+        //{
+        //    try
+        //    {
+        //        myCon.Open();
+        //        using (SqlCommand cmd = new SqlCommand("dbo.usp_GetCompanies", myCon))
+        //        {
+        //            SqlDataReader myDr = cmd.ExecuteReader();
 
-                    ddlCompany.DataSource = myDr;
-                    ddlCompany.DataTextField = "CompanyName";
-                    ddlCompany.DataValueField = "ID";
-                    ddlCompany.DataBind();
-                    ddlCompany.Items.Insert(0, new ListItem("-- Select Company --", "0"));
+        //            ddlCompany.DataSource = myDr;
+        //            ddlCompany.DataTextField = "CompanyName";
+        //            ddlCompany.DataValueField = "ID";
+        //            ddlCompany.DataBind();
+        //            ddlCompany.Items.Insert(0, new ListItem("-- Select Company --", "0"));
 
-                    myDr.Close();
-                }
-            }
-            catch (Exception ex) { lblMessage.Text = "Error in Employees - GetCompaniesForDLL: " + ex.Message; }
-            finally { myCon.Close(); }
-        }
+        //            myDr.Close();
+        //        }
+        //    }
+        //    catch (Exception ex) { lblMessage.Text = "Error in Employees - GetCompaniesForDLL: " + ex.Message; }
+        //    finally { myCon.Close(); }
+        //}
 
         private void DisplayAttendee(int strAttID) 
         {
@@ -393,5 +411,70 @@ namespace QRWebsite
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openEmpQR();", true);
         }
+
+        protected void btnSubmitAttendee_Click(object sender, EventArgs e)
+        {
+
+            CheckAttendeeCreds(txtEmail.Text, txtPassword.Value);
+
+            if (RecordCheck == 1)
+            {
+                //clear out values and allow to access
+                txtEmail.Text = "";
+                txtPassword.Value = "";
+                Label4.Text = "";
+                
+                DoGridView();
+
+                int intAttendID = Convert.ToInt32(Request.QueryString["var1"]);
+                DisplayAttendee(intAttendID);
+
+            }
+            else
+            {
+
+                //clear out values
+                txtEmail.Text = "";
+                txtPassword.Value = "";
+                //txtPassword.Text = "";
+
+                //error message - invalid crendentials
+                lblAttMessage.Text = "Invalid credentials. Please try again. ";
+
+                // SEARCH FOR BUTTON CLICK DON'T CLOSE MODAL
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openAttendeeLogin();", true);
+            }
+
+        }
+
+        private void CheckAttendeeCreds(string TxtEmail, string TxtPassword)
+        {
+            try
+            {
+                myCon.Open();
+                using (SqlCommand cmd = new SqlCommand("dbo.usp_GetUserATT", myCon))
+                {
+                    cmd.Connection = myCon;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@EmailAddress", SqlDbType.VarChar).Value = TxtEmail;
+                    cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = TxtPassword;
+
+                    SqlDataReader myDrDef = cmd.ExecuteReader();
+
+                    if (myDrDef.HasRows)
+                    {
+                        while (myDrDef.Read())
+                        {
+                            RecordCheck = 1;
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex) { lblMessage.Text = "Error in Login - Attendee: " + ex.Message; }
+            finally { myCon.Close(); }
+        }
+
     }
 }

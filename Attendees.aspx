@@ -33,9 +33,9 @@
             <div class="navbar-collapse collapse">
                 <div class="col-sm-6">
                     <ul class="nav navbar-nav" style="font-weight: bold;">
-                        <li>
+<%--                        <li>
                             <asp:HyperLink ID="hlHome" NavigateUrl="~/Default.aspx" runat="server">Home</asp:HyperLink><br />
-                        </li>
+                        </li>--%>
                         <li>
                             <asp:HyperLink ID="hlEmployees" NavigateUrl="~/Attendees.aspx" runat="server">Attendees</asp:HyperLink><br />
                         </li>

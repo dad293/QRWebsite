@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript">
+        //open for attendee
+        function openAttendeeLogin() {
+            //alert("Opening modal!");
+            $('#modLoginAttendee').modal('show');
+        }
         function openEmpDetail() {
             //alert("Opening modal!");
             $('#modEmpDetail').modal('show');
@@ -33,10 +38,10 @@
             <div class="navbar-collapse collapse">
                 <div class="col-sm-6">
                     <ul class="nav navbar-nav" style="font-weight: bold;">
-                        <li>
+<%--                         <li>
                             <asp:HyperLink ID="hlHome" NavigateUrl="~/AttendeesQR.aspx" runat="server">Home</asp:HyperLink><br />
                         </li>
-<%--                        <li>
+                       <li>
                             <asp:HyperLink ID="hlEmployees" NavigateUrl="~/Attendees.aspx" runat="server">Attendees</asp:HyperLink><br />
                         </li>
                         <li>
@@ -67,7 +72,6 @@
                     <asp:GridView ID="gvEmployees" runat="server" AutoGenerateColumns="False" AllowSorting="True"
                         DataKeyNames="ID"
                         CssClass="table table-striped table-bordered table-condensed" BorderColor="Silver"
-                        OnRowDeleting="gvEmployees_RowDeleting"
                         OnRowCommand="gvEmployees_RowCommand"
                         OnRowDataBound="gvEmployees_RowDataBound"
                         EmptyDataText="No data for this request!">
@@ -131,89 +135,56 @@
 
         </div>
 
-        <!-- Modal to Add New or View / Update a Company Details-->
-        <div class="modal fade" id="modEmpDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!-- Modal to show Login -->
+        <div class="modal fade" id="modLoginAttendee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lg" style="width: 600px;">
                 <div class="modal-content" style="font-size: 11px;">
 
                     <div class="modal-header" style="text-align: center;">
-                        <asp:Label ID="lblEmployeeNew" runat="server" Text="Add New Attendees" Font-Size="24px" Font-Bold="true" />
-                        <asp:Label ID="lblEmployeeUpd" runat="server" Text="View / Update an Attendees" Font-Size="24px" Font-Bold="true" />
+                        <asp:Label ID="Label5" runat="server" Text="Attendee Login Page" Font-Size="24px" Font-Bold="true" />
                     </div>
 
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-12">
 
-                                <%-- Employee Details Textboxes --%>
-                                <div class="col-sm-12">
-                                    <div class="row" style="margin-top: 20px;">
-                                        <div class="col-sm-1"></div>
-                                        <div class="col-sm-10">
-                                            <asp:TextBox ID="txtEmployeeName" runat="server" MaxLength="255" CssClass="form-control input-xs" 
-                                                ToolTip="Attendee Name"
-                                                AutoCompleteType="Disabled" placeholder="Attendee Name" />
-                                            <asp:Label runat="server" ID="lblEmpID" Visible="false" Font-Size="12px" />
-                                            <asp:Label runat="server" ID="lblQRCreated" Visible="false" Font-Size="12px" />
-                                        </div>
-                                        <div class="col-sm-1">
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top: 20px;">
-                                        <div class="col-sm-1"></div>
-                                        <div class="col-sm-10">
-                                            <asp:TextBox ID="txtContactNo" runat="server" MaxLength="255" CssClass="form-control input-xs" 
-                                                ToolTip="Contact Number"
-                                                AutoCompleteType="Disabled" placeholder="Contact Number" />
-                                        </div>
-                                        <div class="col-sm-1">
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top: 20px;">
-                                        <div class="col-sm-1"></div>
-                                        <div class="col-sm-10">
+                                <%-- LOGIN FIELDS --%>
+                                <div class="row" style="margin-top: 0px;">
+                                    <div class="col-sm-8">
+
+
+                                        <div class="row" style="margin-top: 20px;">
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="Label6" runat="server" Text="Email:" Font-Size="14px" Font-Bold="true" />
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <asp:Label ID="Label10" runat="server" Visible="true" Font-Size="14px" />
                                             <asp:TextBox ID="txtEmail" runat="server" MaxLength="255" CssClass="form-control input-xs" 
                                                 ToolTip="Email"
                                                 AutoCompleteType="Disabled" placeholder="Email" />
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="row" style="margin-top: 20px;">
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="Label11" runat="server" Text="Password:" Font-Size="14px" Font-Bold="true" />
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <asp:Label ID="lblPassword" runat="server" Visible="true" Font-Size="14px" />
+                                                <%--<asp:TextBox ID="txtPassword" runat="server" MaxLength="255" CssClass="form-control input-xs" 
+                                                    ToolTip="Password"
+                                                    AutoCompleteType="Disabled" placeholder="Password" />--%>
+                                                <input id="txtPassword" class="test" type="password" runat="server" MaxLength="20" ToolTip="Password" placeholder="   Password" >
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
                                         </div>
+
                                     </div>
-                                    <div class="row" style="margin-top: 20px;">
-                                        <div class="col-sm-1"></div>
-                                        <div class="col-sm-10">
-                                            <asp:DropDownList ID="ddlCompany" runat="server" CssClass="form-control input-xs" />
-                                        </div>
-                                        <div class="col-sm-1">
-                                        </div>
-                                    </div>
-<%--                                    <div class="row" style="margin-top: 20px;">
-                                        <div class="col-sm-1"></div>
-                                        <div class="col-sm-10">
-                                            <asp:Image ID="QR_Code" runat="server" ImageUrl="../images/QR_code_test.PNG" />
-                                        </div>
-                                        <div class="col-sm-1">
-                                        </div>
-                                    </div>--%>
-                                </div>
-                                <%-- QR Image --%>
-                                <div class="col-sm-6">
-                                    <div class="row" style="margin-top: 20px;">
-                                        <div class="col-sm-1"></div>
-                                        <div class="col-sm-10">
-                                            <asp:Image ID="imgQREmp" runat="server" Width="200px" Visible="false" />
-                                            <asp:Label runat="server" ID="lblQRImageMsg" Visible="false" Font-Size="12px" Text="No QR Image available" Font-Bold="true" />
-                                        </div>
-                                        <div class="col-sm-1"></div>
-                                    </div>
-                                    <div class="row" style="margin-top: 20px;">
-                                        <div class="col-sm-1"></div>
-                                        <div class="col-sm-10">
-                                            <asp:LinkButton runat="server" ID="lbCreateQRImg" Visible="false" Font-Size="12px" Text="Create Image" Font-Bold="true" OnClick="lbCreateQRImg_Click" />
-                                        </div>
-                                        <div class="col-sm-1">
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -222,32 +193,29 @@
                         <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10">
-                                <asp:Label ID="lblModalMessage" runat="server" ForeColor="Red" Font-Size="12px" Text="" />
+                                <asp:Label ID="lblAttMessage" runat="server" ForeColor="Red" Font-Size="12px" Text="" />
                             </div>
                             <div class="col-sm-1"></div>
                         </div>
                     </div>
 
-                    <%-- Add, Update and Cancel Buttons --%>
+                    <%-- Submit Button --%>
                     <div class="modal-footer">
-                        <asp:Button ID="btnAddEmployee" runat="server" class="btn btn-danger button-xs" data-dismiss="modal" 
-                            Text="Add Attendee"
-                            Visible="true" CausesValidation="false"
-                            OnClick="btnAddEmployee_Click"
+                        <asp:Button ID="btnSubmitAttendee" runat="server" class="btn btn-danger button-xs"  
+                            Text="Submit"                            
+                            OnClick="btnSubmitAttendee_Click" 
+                            data-dismiss="modal" Visible="true" CausesValidation="true"
                             UseSubmitBehavior="false" />
-                        <asp:Button ID="btnUpdEmployee" runat="server" class="btn btn-danger button-xs" data-dismiss="modal" 
-                            Text="Update Attendee"
-                            Visible="false" CausesValidation="false"
-                            OnClick="btnUpdEmployee_Click"
-                            UseSubmitBehavior="false" />
-                        <asp:Button ID="btnClose" runat="server" class="btn btn-info button-xs" data-dismiss="modal" Text="Close" 
+<%--                        <asp:Button ID="Button3" runat="server" class="btn btn-info button-xs" data-dismiss="modal" Text="Exit App"
                             CausesValidation="false"
-                            UseSubmitBehavior="false" />
+                            OnClientClick="closeApp()"
+                            UseSubmitBehavior="false" />--%>
                     </div>
 
                 </div>
             </div>
         </div>
+
 
         <!-- Modal to show Employee QR Image -->
         <div class="modal fade" id="modEmpQR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -317,6 +285,7 @@
                                     <div class="col-sm-4">
                                         <div class="row" style="margin-top: 20px;">
                                             <div class="col-sm-12">
+                                                <asp:Label runat="server" ID="lblQRCreated" Visible="false" Font-Size="12px" />
                                                 <asp:Image ID="imgShowQR" runat="server" Width="100%" />
                                             </div>
                                         </div>

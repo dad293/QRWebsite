@@ -12,6 +12,7 @@ namespace QRWebsite
     {
         int Comp_ID;
         SqlConnection myCon = new SqlConnection(ConfigurationManager.ConnectionStrings["QRDBConnection"].ConnectionString);
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
