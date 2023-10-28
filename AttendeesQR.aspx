@@ -223,7 +223,7 @@
                 <div class="modal-content" style="font-size: 11px;">
 
                     <div class="modal-header" style="text-align: center;">
-                        <asp:Label ID="Label1" runat="server" Text="Employee QR Image" Font-Size="24px" Font-Bold="true" />
+                        <asp:Label ID="Label1" runat="server" Text="Attendee QR Image" Font-Size="24px" Font-Bold="true" />
                     </div>
 
                     <div class="modal-body">
@@ -236,7 +236,7 @@
                                         <div class="row" style="margin-top: 20px;">
                                             <div class="col-sm-1"></div>
                                             <div class="col-sm-3">
-                                                <asp:Label ID="Label2" runat="server" Text="Employee:" Font-Size="14px" Font-Bold="true" />
+                                                <asp:Label ID="Label2" runat="server" Text="Attendee:" Font-Size="14px" Font-Bold="true" />
                                             </div>
                                             <div class="col-sm-7">
                                                 <asp:Label ID="lblEmployeeName" runat="server"
